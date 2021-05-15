@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Goblin+One&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.logo {
+  width: 20%;
+  cursor: pointer;
+}
+
+.navbar {
+  color: red;
+  background: tomato;
+}
+
+.navbar-nav {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.container {
+  margin-top: 35vh;
+}
+
+.home-title {
+  font-family: 'Goblin One', cursive;
+  font-weight: 500;
+  font-size: 150%;
+}
