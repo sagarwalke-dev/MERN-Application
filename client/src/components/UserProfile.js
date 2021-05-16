@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Profile.css";
 import userPic from "../images/sagar.jpg";
-import editImage from "../images/edit.svg";
+
 const UserProfile = () => {
   return (
     <>
@@ -12,7 +12,6 @@ const UserProfile = () => {
               <div class='col-sm-4 bg-c-lite-green user-profile '>
                 <div class='card-block text-center text-white'>
                   <div class='m-b-25'>
-                    {" "}
                     <img
                       src={userPic}
                       class='img-radius'

@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./css/Registration.css";
 import registrationImage from "../images/registration.svg";
+
 const Registration = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    work: "",
+    password: "",
+    cpassword: "",
+  });
+  let name, value;
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+  let handleInputData = (e) => {
+    document.getElementById("error-message").className = "";
+    document.getElementById("error-message").innerHTML = "";
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
+
+  let validation = (e) => {
+    e.preventDefault();
+
+    if (user.password != user.cpassword) {
+      document.getElementById("error-message").className =
+        "alert alert-danger error-message";
+      document.getElementById("error-message").innerHTML = "Password not match";
+    }
+    if (!reg.test(user.email)) {
+      document.getElementById("error-message").className =
+        "alert alert-danger error-message";
+      document.getElementById("error-message").innerHTML =
+        "Please enter valid email";
+    }
+  };
   return (
     <>
       <div className='container mt-3 auto'>
@@ -14,29 +49,36 @@ const Registration = () => {
                 style={{ backgroundImage: `url(${registrationImage})` }}></div>
               <div className='card-body'>
                 <h5 className='card-title text-center'>Register</h5>
-                <form className='form-signin'>
+                <div className='' id='error-message'></div>
+                <form
+                  className='form-signin'
+                  method='POST'
+                  onSubmit={validation}>
                   <div className='form-label-group pointer'>
                     <input
                       type='text'
-                      id='inputUserame'
+                      id='inputName'
                       className='form-control'
                       placeholder='Name'
+                      title='Enter valid name'
                       name='name'
                       required
-                      autofocus
+                      onChange={handleInputData}
                     />
-                    <label for='inputUserame'>Username</label>
+                    <label htmlFor='inputName'>Name</label>
                   </div>
 
                   <div className='form-label-group'>
                     <input
                       type='email'
                       id='inputEmail'
+                      name='email'
                       className='form-control'
                       placeholder='Email address'
+                      onChange={handleInputData}
                       required
                     />
-                    <label for='inputEmail'>Email address</label>
+                    <label htmlFor='inputEmail'>Email address</label>
                   </div>
                   <div className='form-label-group'>
                     <input
@@ -45,9 +87,12 @@ const Registration = () => {
                       className='form-control'
                       placeholder='Contact number'
                       name='contact'
+                      pattern='[1-9]{1}[0-9]{9}'
+                      title='Enter 10 digit mobile number'
+                      onChange={handleInputData}
                       required
                     />
-                    <label for='inputContact'>Contact number</label>
+                    <label htmlFor='inputContact'>Contact number</label>
                   </div>
 
                   <div className='form-label-group'>
@@ -57,9 +102,10 @@ const Registration = () => {
                       className='form-control'
                       placeholder='Work'
                       name='work'
+                      onChange={handleInputData}
                       required
                     />
-                    <label for='inputWork'>Work</label>
+                    <label htmlFor='inputWork'>Work</label>
                   </div>
 
                   <div className='form-label-group'>
@@ -68,9 +114,11 @@ const Registration = () => {
                       id='inputPassword'
                       className='form-control'
                       placeholder='Password'
+                      name='password'
+                      onChange={handleInputData}
                       required
                     />
-                    <label for='inputPassword'>Password</label>
+                    <label htmlFor='inputPassword'>Password</label>
                   </div>
 
                   <div className='form-label-group'>
@@ -78,15 +126,20 @@ const Registration = () => {
                       type='password'
                       id='inputConfirmPassword'
                       className='form-control'
-                      placeholder='Password'
+                      placeholder='Confirm password'
+                      name='cpassword'
+                      onChange={handleInputData}
                       required
                     />
-                    <label for='inputConfirmPassword'>Confirm password</label>
+                    <label htmlFor='inputConfirmPassword'>
+                      Confirm password
+                    </label>
                   </div>
 
                   <button
                     className='btn btn-lg btn-primary btn-block text-uppercase'
-                    type='submit'>
+                    type='submit'
+                    onSubmit={validation}>
                     Register
                   </button>
 
