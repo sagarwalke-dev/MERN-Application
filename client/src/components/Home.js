@@ -3,12 +3,13 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      <div class='container h-100 text-center mx-auto'>
-        {/* <div class=' justify-content-center align-self-center'> */}
-        <p className='h5 font-weight-bold text-info'>Welcome</p>
-        <p className='home-title'>We Are The MERN Developer</p>
+      <div className='container mt-5  pt-5 text-center home'>
+        {/* <div className='row'> */}
+        <div className='col-sm-0 col-sm-0  mx-auto shadow-lg p-3 mb-5 bg-white rounded'>
+          <p className='home-title p-5'>We Are The MERN Developer</p>
+        </div>
+        {/* </div> */}
       </div>
-      {/* </div> */}
     </>
   );
 };

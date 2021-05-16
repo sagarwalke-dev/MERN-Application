@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 const Header = () => {
   return (
     <div>
-      <nav className='navbar navbar-expand-sm py-0 navbar-light bg-light'>
+      <nav className='navbar navbar-expand-sm py-0 navbar-light bg-white'>
         <img className='logo' src={logo} alt='Code Creator' />
         <button
           className='navbar-toggler'
@@ -26,9 +26,10 @@ const Header = () => {
                 Home <span className='sr-only'>(current)</span>
               </NavLink>
             </li>
+
             <li className='nav-item'>
-              <NavLink className='nav-link' to='/About'>
-                About
+              <NavLink className='nav-link' to='/User-profile'>
+                Profile
               </NavLink>
             </li>
             <li className='nav-item'>

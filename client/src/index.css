@@ -15,22 +15,17 @@ code {
   cursor: pointer;
 }
 
-.navbar {
-  color: red;
-  background: tomato;
-}
-
 .navbar-nav {
   font-size: larger;
   font-weight: 500;
-}
-
-.container {
-  margin-top: 35vh;
 }
 
 .home-title {
   font-family: 'Goblin One', cursive;
   font-weight: 500;
   font-size: 150%;
+}
+
+.home {
+  top: 70px;
 }

@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Home from "./components/Home";
 import About from "./components/About";
+import UserProfile from "./components/UserProfile";
 import Contact from "./components/Contact";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
@@ -17,6 +18,10 @@ function App() {
 
       <Route path='/About'>
         <About />
+      </Route>
+
+      <Route path='/User-profile'>
+        <UserProfile />
       </Route>
 
       <Route path='/Contact'>
