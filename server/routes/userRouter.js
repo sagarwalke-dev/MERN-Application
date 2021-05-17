@@ -18,10 +18,13 @@ router.post("/login", function (req, res, next) {
 
 //test route
 router.get("/test", function (req, res, next) {
-  res.cookie("jwtoken", "MY JWT TOKEN", {
-    expires: new Date(Date.now + 5000000),
-    httpOnly: true,
-  });
-  res.send("Cookies added");
+  // let data = "MYCOOKIES";
+  // res.cookie("jwtoken", data, {
+  //   expires: new Date(Date.now + 5000000),
+  //   httpOnly: true,
+  // });
+  // res.send("Cookies added");
+  var cookies = req.headers.cookie;
+  res.end(`<h1>${cookies}</h1>`);
 });
 module.exports = router;

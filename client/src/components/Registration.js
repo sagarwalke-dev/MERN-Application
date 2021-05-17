@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import "./css/Registration.css";
 import registrationImage from "../images/registration.svg";
 
@@ -12,32 +13,66 @@ const Registration = () => {
     password: "",
     cpassword: "",
   });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   let name, value;
   var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
   let handleInputData = (e) => {
-    document.getElementById("error-message").className = "";
-    document.getElementById("error-message").innerHTML = "";
+    document.getElementById("error").className = "";
+    document.getElementById("error").innerHTML = "";
     name = e.target.name;
     value = e.target.value;
     setUser({ ...user, [name]: value });
   };
 
-  let validation = (e) => {
+  let validation = async (e) => {
     e.preventDefault();
 
     if (user.password != user.cpassword) {
-      document.getElementById("error-message").className =
+      document.getElementById("error").className =
         "alert alert-danger error-message";
-      document.getElementById("error-message").innerHTML = "Password not match";
+      document.getElementById("error").innerHTML = "Password not match";
+      return;
     }
     if (!reg.test(user.email)) {
-      document.getElementById("error-message").className =
+      document.getElementById("error").className =
         "alert alert-danger error-message";
-      document.getElementById("error-message").innerHTML =
-        "Please enter valid email";
+      document.getElementById("error").innerHTML = "Please enter valid email";
+      return;
     }
+
+    //submit data
+    fetch("http://localhost:3000/registration", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.error) {
+          document.getElementById("error").className =
+            "alert alert-danger error-message";
+          setError(json.error);
+          setTimeout(() => {
+            document.getElementById("error").className = "";
+            document.getElementById("error").innerHTML = "";
+          }, 5000);
+        } else {
+          document.getElementById("success").className =
+            "alert alert-success success-message";
+          setSuccess(json.message);
+          setTimeout(() => {
+            document.getElementById("success").className = "";
+            document.getElementById("success").innerHTML = "";
+          }, 5000);
+        }
+      });
   };
+
   return (
     <>
       <div className='container mt-3 auto'>
@@ -49,7 +84,12 @@ const Registration = () => {
                 style={{ backgroundImage: `url(${registrationImage})` }}></div>
               <div className='card-body'>
                 <h5 className='card-title text-center'>Register</h5>
-                <div className='' id='error-message'></div>
+                <div className='' id='error'>
+                  {error}
+                </div>
+                <div className='' id='success'>
+                  {success}
+                </div>
                 <form
                   className='form-signin'
                   method='POST'

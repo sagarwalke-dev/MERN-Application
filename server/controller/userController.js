@@ -27,10 +27,10 @@ let userRegistration = async (req, res, next) => {
     if (response) {
       return res.status(201).json({ message: "User registered successfully" });
     } else {
-      return res.status(500).json({ message: "User registration failed" });
+      return res.status(500).json({ error: "User registration failed" });
     }
   } catch (err) {
-    res.status(500).json({ message: "Something went wrong" });
+    res.status(500).json({ error: "Something went wrong" });
     console.log(err);
   }
 };
