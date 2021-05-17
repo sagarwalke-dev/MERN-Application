@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import loginImage from "../images/login.svg";
+
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const history = useHistory();
 
   let name, value;
   let handleInput = (e) => {
@@ -18,8 +20,9 @@ const Login = () => {
   };
   let submitData = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/login", {
+    const res = await fetch("/login", {
       method: "POST",
+      credentials: "include",
       body: JSON.stringify(user),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -36,6 +39,9 @@ const Login = () => {
       document.getElementById("success").className =
         "alert alert-success success-message";
       setSuccess(data.message);
+      setTimeout(() => {
+        history.push("/User-profile");
+      }, 3000);
     }
   };
 
@@ -70,7 +76,7 @@ const Login = () => {
                       onChange={handleInput}
                       required
                     />
-                    <label for='inputEmail'>Email address</label>
+                    <label htmlFor='inputEmail'>Email address</label>
                   </div>
                   <div className='form-label-group'>
                     <input
@@ -82,7 +88,7 @@ const Login = () => {
                       onChange={handleInput}
                       required
                     />
-                    <label for='inputPassword'>Password</label>
+                    <label htmlFor='inputPassword'>Password</label>
                   </div>
                   <button
                     className='btn btn-lg btn-primary btn-block text-uppercase'

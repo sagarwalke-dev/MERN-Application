@@ -4,6 +4,7 @@ import UserProfile from "./components/UserProfile";
 import Contact from "./components/Contact";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
+import About from "./components/About";
 import { Route } from "react-router-dom";
 import "./index.css";
 import "./App.css";
@@ -13,7 +14,7 @@ function App() {
       <Header />
       <Route exact path='/' component={Home} />
 
-      <Route exact path='/About' />
+      <Route exact path='/about' component={About} />
 
       <Route path='/User-profile'>
         <UserProfile />

@@ -56,6 +56,7 @@ let userLogin = async (req, res, next) => {
         expires: new Date(Date.now + 5000000),
         httpOnly: true,
       });
+      console.log("cookies added");
       return res.status(200).json({ message: "Login success" });
     }
   } else {
