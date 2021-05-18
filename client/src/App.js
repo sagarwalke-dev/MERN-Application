@@ -5,30 +5,38 @@ import Contact from "./components/Contact";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import About from "./components/About";
-import { Route } from "react-router-dom";
+import Logout from "./components/Logout";
+import Error from "./components/Error";
+import { Route, Switch } from "react-router-dom";
 import "./index.css";
 import "./App.css";
+import { createContext, useReducer } from "react";
+import { initialState, reducer } from "../src/services/reducer";
+export const UserContext = createContext();
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <>
-      <Header />
-      <Route exact path='/' component={Home} />
+      <UserContext.Provider value={{ state, dispatch }}>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
 
-      <Route exact path='/about' component={About} />
+          <Route exact path='/about' component={About} />
 
-      <Route path='/User-profile'>
-        <UserProfile />
-      </Route>
+          <Route exact path='/User-profile' component={UserProfile} />
 
-      <Route path='/Contact' component={Contact} />
+          <Route path='/Contact' component={Contact} />
 
-      <Route path='/Registration'>
-        <Registration />
-      </Route>
+          <Route exact path='/Registration' component={Registration} />
 
-      <Route path='/Login'>
-        <Login />
-      </Route>
+          <Route exact path='/Login' component={Login} />
+
+          <Route exact path='/Logout' component={Logout} />
+
+          <Route component={Error} />
+        </Switch>
+      </UserContext.Provider>
     </>
   );
 }

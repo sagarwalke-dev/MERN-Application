@@ -16,9 +16,14 @@ router.post("/login", function (req, res, next) {
   console.log("end checking login details...");
 });
 
-router.get("/profile", Auth, function (req, res, next) {
-  console.log("req.end");
-  res.end("COMPLETED");
+//logout route
+router.get("/logout", function (req, res, next) {
+  res.clearCookie("jwtoken", { path: "/" });
+  console.log("user logged out");
+  res.sendStatus(200).send("User Logged out");
+});
+router.get("/auth", Auth, function (req, res, next) {
+  console.log("Auth completed");
 });
 
 //test route

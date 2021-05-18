@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import loginImage from "../images/login.svg";
+import { UserContext } from "../App";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const history = useHistory();
+  const { state, dispatch } = useContext(UserContext);
 
   let name, value;
   let handleInput = (e) => {
@@ -36,12 +38,12 @@ const Login = () => {
         "alert alert-danger error-message";
       setError("Invalid username and password");
     } else {
+      dispatch({ type: "USER", payload: true });
       document.getElementById("success").className =
         "alert alert-success success-message";
       setSuccess(data.message);
-      setTimeout(() => {
-        history.push("/User-profile");
-      }, 3000);
+
+      history.push("/User-profile");
     }
   };
 

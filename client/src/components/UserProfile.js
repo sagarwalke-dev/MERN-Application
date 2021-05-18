@@ -17,7 +17,7 @@ const UserProfile = () => {
   });
   useEffect(() => {
     let verifyToken = async () => {
-      const res = await fetch("/profile", {
+      const res = await fetch("/auth", {
         method: "get",
         credentials: "include",
         headers: {

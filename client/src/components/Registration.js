@@ -43,7 +43,7 @@ const Registration = () => {
     }
 
     //submit data
-    fetch("http://localhost:3000/registration", {
+    fetch("/registration", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
